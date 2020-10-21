@@ -3,6 +3,9 @@
     "description": "Extend the f:translate viewhelper",
     "type": "typo3-cms-extension",
     "version": "1.0.3",
+    "license": [
+        "GPL-2.0-or-later"
+    ],
     "authors": [
         {
             "name": "Roman Eckert",
