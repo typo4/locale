@@ -1,8 +1,8 @@
 <?php
 
-namespace Bundl\Locale\ViewHelper;
+namespace Typo4\Locale\ViewHelper;
 
-use Bundl\Locale\Utility\LocaleLangUtility;
+use Typo4\Locale\Utility\LocaleLangUtility;
 use TYPO3\CMS\Core\Core\Environment;
 
 class TranslateViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\TranslateViewHelper {

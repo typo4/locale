@@ -1,6 +1,6 @@
 <?php
 
-namespace Bundl\Locale\Utility;
+namespace Typo4\Locale\Utility;
 
 use DOMDocument;
 use RuntimeException;

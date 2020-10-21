@@ -1,5 +1,5 @@
 {
-  "name": "bundl/locale",
+  "name": "typo4/locale",
   "description": "Extend the f:translate viewhelper",
   "type": "typo3-cms-extension",
   "version": "1.0.0",
@@ -8,7 +8,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Bundl\\Locale\\": "Classes/"
+      "Typo4\\Locale\\": "Classes/"
     }
   }
 }
