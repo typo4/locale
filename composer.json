@@ -1,14 +1,20 @@
 {
-  "name": "typo4/locale",
-  "description": "Extend the f:translate viewhelper",
-  "type": "typo3-cms-extension",
-  "version": "1.0.2",
-  "config": {
-    "preferred-install": "dist"
-  },
-  "autoload": {
-    "psr-4": {
-      "Typo4\\Locale\\": "Classes/"
+    "name": "typo4/locale",
+    "description": "Extend the f:translate viewhelper",
+    "type": "typo3-cms-extension",
+    "version": "1.0.3",
+    "authors": [
+        {
+            "name": "Roman Eckert",
+            "email": "mail@romaneckert.de"
+        }
+    ],
+    "config": {
+        "preferred-install": "dist"
+    },
+    "autoload": {
+        "psr-4": {
+            "Typo4\\Locale\\": "Classes/"
+        }
     }
-  }
 }

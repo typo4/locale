@@ -2,4 +2,5 @@
 
 defined('TYPO3_MODE') || die();
 
-(static function (): void {})();
+(static function (): void {
+})();

@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class LocaleLangUtility {
     public static function update(string $id, string $extensionKey): void {
-        $pathToLanguageFolder = Environment::getPublicPath().'/typo3conf/ext/'.$extensionKey.'/Resources/Private/Language/';
+        $pathToLanguageFolder = Environment::getPublicPath() . '/typo3conf/ext/' . $extensionKey . '/Resources/Private/Language/';
 
         // get translation array and locales
         list($translations, $locales) = self::loadTranslationDataFromAllXLF($extensionKey);
@@ -42,15 +42,15 @@ class LocaleLangUtility {
 
         foreach ($translationSortedByLocale as $locale => $translationSortedByLocaleEntry) {
             if ('default' === $locale) {
-                $pathToTranslationFile = $pathToLanguageFolder.'locallang.xlf';
+                $pathToTranslationFile = $pathToLanguageFolder . 'locallang.xlf';
             } else {
-                $pathToTranslationFile = $pathToLanguageFolder.$locale.'.locallang.xlf';
+                $pathToTranslationFile = $pathToLanguageFolder . $locale . '.locallang.xlf';
             }
 
             $xml = new DOMDocument('1.0', 'UTF-8');
             $xml->preserveWhiteSpace = false;
             $xml->formatOutput = true;
-            $xml->load($pathToLanguageFolder.'locallang.xlf');
+            $xml->load($pathToLanguageFolder . 'locallang.xlf');
 
             $body = $xml->getElementsByTagName('body')->item(0);
 
@@ -75,16 +75,16 @@ class LocaleLangUtility {
     }
 
     protected static function loadTranslationDataFromAllXLF(string $extensionKey): array {
-        $pathToLanguageFolder = Environment::getPublicPath().'/typo3conf/ext/'.$extensionKey.'/Resources/Private/Language/';
+        $pathToLanguageFolder = Environment::getPublicPath() . '/typo3conf/ext/' . $extensionKey . '/Resources/Private/Language/';
 
         if (!is_dir($pathToLanguageFolder)) {
-            throw new RuntimeException($pathToLanguageFolder.' does not exist. Please create that folder.');
+            throw new RuntimeException($pathToLanguageFolder . ' does not exist. Please create that folder.');
         }
 
-        $pathToDefaultLanguageFile = $pathToLanguageFolder.'locallang.xlf';
+        $pathToDefaultLanguageFile = $pathToLanguageFolder . 'locallang.xlf';
 
         if (!is_file($pathToDefaultLanguageFile)) {
-            throw new RuntimeException($pathToDefaultLanguageFile.' does not exist. Please create that file');
+            throw new RuntimeException($pathToDefaultLanguageFile . ' does not exist. Please create that file');
         }
 
         $xml = simplexml_load_string(file_get_contents($pathToDefaultLanguageFile));
@@ -92,16 +92,16 @@ class LocaleLangUtility {
         $translations = [];
 
         foreach ($xml->file->body->children() as $transUnit) {
-            $id = (string) $transUnit->attributes()->id;
+            $id = (string)$transUnit->attributes()->id;
 
             if (empty($id)) {
-                throw new RuntimeException('error in translation file: '.$pathToDefaultLanguageFile);
+                throw new RuntimeException('error in translation file: ' . $pathToDefaultLanguageFile);
             }
 
-            $value = (string) $transUnit->source;
+            $value = (string)$transUnit->source;
 
             if (empty($value)) {
-                throw new RuntimeException('error in translation file: '.$pathToDefaultLanguageFile);
+                throw new RuntimeException('error in translation file: ' . $pathToDefaultLanguageFile);
             }
 
             $translations[$id] = [];
@@ -114,19 +114,19 @@ class LocaleLangUtility {
 
         foreach ($files as $file) {
             if (false !== strpos($file, '.locallang.xlf')) {
-                $pathToTranslationFile = $pathToLanguageFolder.$file;
+                $pathToTranslationFile = $pathToLanguageFolder . $file;
                 $xml = simplexml_load_string(file_get_contents($pathToTranslationFile));
 
                 $locale = explode('.', $file)[0];
 
                 foreach ($xml->file->body->children() as $transUnit) {
-                    $id = (string) $transUnit->attributes()->id;
+                    $id = (string)$transUnit->attributes()->id;
                     if (empty($id)) {
-                        throw new RuntimeException('error in translation file: '.$pathToTranslationFile);
+                        throw new RuntimeException('error in translation file: ' . $pathToTranslationFile);
                     }
-                    $value = (string) $transUnit->target;
+                    $value = (string)$transUnit->target;
                     if (empty($value)) {
-                        throw new RuntimeException('error in translation file: '.$pathToTranslationFile);
+                        throw new RuntimeException('error in translation file: ' . $pathToTranslationFile);
                     }
                     if (isset($translations[$id]['default'])) {
                         $translations[$id][$locale] = $value;
