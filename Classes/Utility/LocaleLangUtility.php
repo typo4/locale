@@ -25,14 +25,22 @@ class LocaleLangUtility {
             $translations = [];
         }
 
+        $changed = false;
+
         if (!isset($translations[$id]['default'])) {
             $translations[$id]['default'] = $id;
+            $changed = true;
         }
 
         foreach ($locales as $locale) {
             if (!isset($translations[$id][$locale])) {
                 $translations[$id][$locale] = $translations[$id]['default'];
+                $changed = true;
             }
+        }
+
+        if(!$changed) {
+            return;
         }
 
         ksort($translations);
@@ -45,6 +53,8 @@ class LocaleLangUtility {
                 $translationSortedByLocale[$locale][$translationId] = $value;
             }
         }
+
+        if($translations)
 
         foreach ($translationSortedByLocale as $locale => $translationSortedByLocaleEntry) {
             if ('default' === $locale) {
